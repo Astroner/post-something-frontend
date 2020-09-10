@@ -54,7 +54,9 @@
     "react-app-rewired": "^2.1.6"
   },
   "husky": {
-    "pre-commit": "lint-staged"
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{.ts,.tsx}": [
