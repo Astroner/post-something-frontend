@@ -1,16 +1,17 @@
 import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
 import { IUserModel } from "./types";
+import { getProfile } from "@/api/user";
 
 export const login = createAsyncThunk(
     "@user_model/login",
     async (data: { token: string }): Promise<Exclude<IUserModel["profile"], undefined>> => {
-        console.log(data)
+        const user = await getProfile(data.token);
         return {
-            email: "example@email.com",
-            firstName: "example",
-            lastName: "example"
-        }
+			email: user.email,
+			firstName: user.first_name,
+			lastName: user.last_name
+		}
     }
 )
 
