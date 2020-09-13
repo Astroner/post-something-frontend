@@ -1,18 +1,18 @@
 import React, { FC, useState, useCallback, useEffect } from "react"
+import { Redirect } from "react-router-dom"
+import { Grid, Paper, TextField, Button } from "@material-ui/core"
 
 import cn from "./SignIn.module.scss"
 import PageLayout from "@/layouts/PageLayout"
 
-import { Grid, Paper, TextField, Button } from "@material-ui/core"
-
 import { signIn } from "@/api/user"
-import { useDispatch } from "react-redux"
-import { login } from "@/model/user/actions"
-import { Redirect } from "react-router-dom"
 import { HOME } from "@/routs"
-export interface ISignIn {}
 
-const SignIn: FC<ISignIn> = (props) => {
+export interface ISignIn {
+	login: (token: string) => void
+}
+
+const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 	const [mail, setMail] = useState<string>("")
 	const [pass, setPass] = useState<string>("")
 	const [formData, setForm] = useState<null | {
@@ -25,8 +25,6 @@ const SignIn: FC<ISignIn> = (props) => {
 		setForm({ email: mail, password: pass })
 	}, [mail, pass])
 
-	const dispatch = useDispatch()
-
 	useEffect(() => {
 		if (!formData) {
 			return
@@ -34,13 +32,14 @@ const SignIn: FC<ISignIn> = (props) => {
 		let mounted = true
 		signIn(formData.email, formData.password).then((result) => {
 			if (!mounted) return
-			dispatch(login(result))
+
+			login(result.token)
 			setLogged(true)
 		})
 		return () => {
 			mounted = false
 		}
-	}, [formData, dispatch])
+	}, [formData, login])
 
 	return (
 		<PageLayout>

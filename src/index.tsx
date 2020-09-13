@@ -1,7 +1,12 @@
 import React from "react"
 import { render } from "react-dom"
 import { Provider } from "react-redux"
-import { Redirect, Route, Router, Switch } from "react-router-dom"
+import {
+	Redirect,
+	Route,
+	BrowserRouter as Router,
+	Switch,
+} from "react-router-dom"
 
 import App from "./App"
 import { store } from "./helpers/redux/store"
@@ -9,7 +14,6 @@ import { store } from "./helpers/redux/store"
 import "./translation"
 import "./global.scss"
 import "normalize.css"
-import { history } from "./helpers/history"
 import * as Routs from "@/routs"
 import HomePage from "./pages/HomePage"
 import Empty from "./pages/Empty"
@@ -19,7 +23,7 @@ const target = document.getElementById("root")
 
 render(
 	<Provider store={store}>
-		<Router history={history}>
+		<Router>
 			<App>
 				<Switch>
 					<Route exact path="/">
