@@ -25,7 +25,7 @@ const PageLayout: FC<IPageLayout> = (props) => {
 		}
 	}, [props.title])
 
-	return <GlobalWidth>{props.children}</GlobalWidth>
+	return <GlobalWidth classes={props.classes}>{props.children}</GlobalWidth>
 }
 
 export default PageLayout

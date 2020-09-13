@@ -1,3 +1,3 @@
-import HP from "./HomePage";
+import HP from "./HomePage"
 
 export default HP
