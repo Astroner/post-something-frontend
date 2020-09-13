@@ -1,19 +1,24 @@
-import React, { FC, memo, ReactNode } from 'react';
+import React, { FC, memo, ReactNode } from "react"
 
-import cn from './GlobalWidth.module.scss'
+import cn from "./GlobalWidth.module.scss"
 
 export interface IGlobalWidth {
-    children?: ReactNode
+	children?: ReactNode
+
+	classes?: {
+		container?: string
+		content?: string
+	}
 }
 
-const GlobalWidth: FC<IGlobalWidth> = props => {
-    return (
-        <div className={cn.root}>
-            <div className={cn.content}>
-                {props.children}
-            </div>
-        </div>
-    )
+const GlobalWidth: FC<IGlobalWidth> = (props) => {
+	return (
+		<div className={`${cn.root} ${props.classes?.container || ""}`}>
+			<div className={`${cn.content} ${props.classes?.content || ""}`}>
+				{props.children}
+			</div>
+		</div>
+	)
 }
 
 export default memo(GlobalWidth)
