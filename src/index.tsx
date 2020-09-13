@@ -1,18 +1,19 @@
-import React from "react";
-import { render } from 'react-dom'
-import { Provider } from "react-redux";
+import React from "react"
+import { render } from "react-dom"
+import { Provider } from "react-redux"
 import { Redirect, Route, Router, Switch } from "react-router-dom"
 
-import App from "./App";
-import { store } from "./helpers/redux/store";
+import App from "./App"
+import { store } from "./helpers/redux/store"
 
 import "./translation"
 import "./global.scss"
 import "normalize.css"
-import { history } from "./helpers/history";
+import { history } from "./helpers/history"
 import * as Routs from "@/routs"
-import HomePage from "./pages/HomePage";
-import Empty from "./pages/Empty";
+import HomePage from "./pages/HomePage"
+import Empty from "./pages/Empty"
+import SignIn from "./pages/SignIn"
 
 const target = document.getElementById("root")
 
@@ -25,7 +26,8 @@ render(
 						<Redirect to={Routs.HOME} />
 					</Route>
 					<Route path={Routs.HOME} component={HomePage} />
-					<Route component={Empty} />
+					<Route path={Routs.SIGNIN} component={SignIn} />
+					<Route path="*" component={Empty} />
 				</Switch>
 			</App>
 		</Router>

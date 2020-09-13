@@ -1,22 +1,19 @@
-import React, { FC } from 'react';
-import { Grid, Paper, Typography } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom'
+import React, { FC } from "react"
+import { Grid, Typography } from "@material-ui/core"
+import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 import PageLayout from "@/layouts/PageLayout"
 
-import cn from './Empty.module.scss'
-import { HOME } from '@/routs';
+// import cn from './Empty.module.scss'
+import { HOME } from "@/routs"
 
-export interface IEmpty {
+export interface IEmpty {}
 
-}
+const Empty: FC<IEmpty> = (props) => {
+	const { t } = useTranslation()
 
-const Empty: FC<IEmpty> = props => {
-
-    const { t } = useTranslation();
-
-    return (
+	return (
 		<PageLayout title={"404"}>
 			<Grid container alignItems="center" direction="column">
 				<Typography variant="h3" color="textSecondary">

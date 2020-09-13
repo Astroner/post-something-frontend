@@ -1,10 +1,17 @@
-import Service from "@/helpers/Service";
+import Service from "@/helpers/Service"
 
 const CreateUserService = new Service({
-    method: "POST",
-    url: "/user/signup"
+	method: "POST",
+	url: "/user/signup",
 })
 
+/**
+ *
+ * @param email user email
+ * @param password user password
+ * @param fname user first name
+ * @param lname user last name
+ */
 export const createUser = (
 	email: string,
 	password: string,
@@ -16,26 +23,28 @@ export const createUser = (
 			email,
 			password,
 			first_name: fname,
-			last_name: lname
+			last_name: lname,
 		},
-    })
-    
+	})
+
 const SignInService = new Service<{ token: string }>({
-    method: "POST",
-    url: "/user/signin/"
+	method: "POST",
+	url: "/user/signin/",
 })
 
-export const signIn = (
-    email: string,
-    password: string
-) => SignInService.call({
-    data: {
-        email,
-        password
-    }
-})
+export const signIn = (email: string, password: string) =>
+	SignInService.call({
+		data: {
+			email,
+			password,
+		},
+	})
 
-const ProfileService = new Service<{ email: string, first_name: string, last_name: string }>("/user/profile/")
+const ProfileService = new Service<{
+	email: string
+	first_name: string
+	last_name: string
+}>("/user/profile/")
 
 export const getProfile = (token: string) =>
 	ProfileService.call({
