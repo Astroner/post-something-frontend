@@ -1,11 +1,9 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit"
 
-import { IUserModel } from "./types";
-import * as Actions from "./actions";
+import { IUserModel } from "./types"
+import * as Actions from "./actions"
 
-const initialState: IUserModel = {
-
-}
+const initialState: IUserModel = {}
 
 export default createReducer<IUserModel>(initialState, (builder) =>
 	builder

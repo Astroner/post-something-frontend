@@ -1,9 +1,9 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit"
 
-import user from "@/model/user";
+import user from "@/model/user"
 
 export const reducer = combineReducers({
 	user,
 })
 
-export type RootState = ReturnType<typeof reducer>;
+export type RootState = ReturnType<typeof reducer>

@@ -1,3 +1,3 @@
-import C from './GlobalWidth'
+import C from "./GlobalWidth"
 
 export default C
