@@ -36,7 +36,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "create": "node createComponent"
+    "create": "node createComponent",
+    "format": "prettier --write ./src/"
   },
   "browserslist": {
     "production": [

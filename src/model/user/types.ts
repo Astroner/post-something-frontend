@@ -1,8 +1,8 @@
 export interface IUserModel {
-    token?: string
-    profile?: {
-        email: string
-        firstName: string
-        lastName: string
-    }
+	token?: string
+	profile?: {
+		email: string
+		firstName: string
+		lastName: string
+	}
 }
