@@ -18,6 +18,7 @@ import * as Routs from "@/routs"
 import HomePage from "./pages/HomePage"
 import Empty from "./pages/Empty"
 import SignIn from "./pages/SignIn"
+import SignUp from "./pages/SignUp"
 
 const target = document.getElementById("root")
 
@@ -31,6 +32,7 @@ render(
 					</Route>
 					<Route path={Routs.HOME} component={HomePage} />
 					<Route path={Routs.SIGNIN} component={SignIn} />
+					<Route path={Routs.SIGNUP} component={SignUp} />
 					<Route path="*" component={Empty} />
 				</Switch>
 			</App>
