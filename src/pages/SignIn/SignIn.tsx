@@ -7,6 +7,7 @@ import PageLayout from "@/layouts/PageLayout"
 
 import { signIn } from "@/api/user"
 import { HOME } from "@/routs"
+import validate from "@/helpers/validateEmail"
 
 export interface ISignIn {
 	login: (token: string) => void
@@ -20,7 +21,8 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 		password: string
 	}>(null)
 	const [isLogged, setLogged] = useState<boolean>(false)
-
+	const [blurred, setBlur] = useState<boolean>(false)
+	const [errored, setError] = useState(false)
 	const submit = useCallback(() => {
 		setForm({ email: mail, password: pass })
 	}, [mail, pass])
@@ -30,16 +32,31 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 			return
 		}
 		let mounted = true
-		signIn(formData.email, formData.password).then((result) => {
-			if (!mounted) return
+		setBlur(true)
+		signIn(formData.email, formData.password)
+			.then((result) => {
+				if (!mounted) return
 
-			login(result.token)
-			setLogged(true)
-		})
+				login(result.token)
+				setLogged(true)
+			})
+			.finally(() => {
+				if (!mounted) return
+				setBlur(false)
+			})
 		return () => {
 			mounted = false
 		}
 	}, [formData, login])
+
+	const change = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setMail(e.target.value)
+		if (!validate(e.target.value)) {
+			setError(true)
+		} else {
+			setError(false)
+		}
+	}, [])
 
 	return (
 		<PageLayout>
@@ -47,8 +64,10 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 			<Grid className={cn.root} container justify="center">
 				<Paper className={cn.form}>
 					<TextField
+						error={errored}
+						type={"email"}
 						value={mail}
-						onChange={(e) => setMail(e.target.value)}
+						onChange={change}
 						label="E-Mail"
 						variant="outlined"
 						style={{ width: "50%", marginBottom: "30px" }}
@@ -62,6 +81,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						variant="outlined"
 					/>
 					<Button
+						disabled={blurred}
 						style={{ display: "block", marginTop: "30px" }}
 						onClick={submit}
 					>
