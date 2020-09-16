@@ -8,6 +8,7 @@ import PageLayout from "@/layouts/PageLayout"
 import { signIn } from "@/api/user"
 import { HOME } from "@/routs"
 import validate from "@/helpers/validateEmail"
+import { useTranslation } from "react-i18next"
 
 export interface ISignIn {
 	login: (token: string) => void
@@ -26,6 +27,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 	const submit = useCallback(() => {
 		setForm({ email: mail, password: pass })
 	}, [mail, pass])
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		if (!formData) {
@@ -68,7 +70,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						type={"email"}
 						value={mail}
 						onChange={change}
-						label="E-Mail"
+						label={t("signin.email")}
 						variant="outlined"
 						style={{ width: "50%", marginBottom: "30px" }}
 					/>
@@ -76,7 +78,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						value={pass}
 						onChange={(e) => setPass(e.target.value)}
 						id="outlined-basic"
-						label="Password"
+						label={t("signin.pass")}
 						type="password"
 						variant="outlined"
 					/>
@@ -85,7 +87,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						style={{ display: "block", marginTop: "30px" }}
 						onClick={submit}
 					>
-						Sign In
+						{t("signin.button")}
 					</Button>
 				</Paper>
 			</Grid>
