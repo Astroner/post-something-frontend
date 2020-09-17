@@ -8,8 +8,16 @@ import PageLayout from "@/layouts/PageLayout"
 import { createUser } from "@/api/user"
 import { SIGNIN } from "@/routs"
 import validate from "@/helpers/validateEmail"
+import { useTranslation } from "react-i18next"
 
 export interface ISignUp {}
+const ButtonInput = { display: "block", marginTop: "30px" }
+const EMailInput = { width: "50%", marginBottom: "30px" }
+const createFunction = (setter: (value: string) => void) => (
+	e: React.ChangeEvent<HTMLInputElement>
+) => {
+	setter(e.target.value)
+}
 
 const SignUp: FC<ISignUp> = (props) => {
 	const [mail, setMail] = useState<string>("")
@@ -28,6 +36,7 @@ const SignUp: FC<ISignUp> = (props) => {
 	const submit = useCallback(() => {
 		setForm({ email: mail, first: fname, second: sname, password: pass })
 	}, [mail, fname, sname, pass])
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		if (!formData) {
@@ -65,6 +74,10 @@ const SignUp: FC<ISignUp> = (props) => {
 		}
 	}, [])
 
+	const changePass = useCallback(createFunction(setPass), [])
+	const changeFName = useCallback(createFunction(setFName), [])
+	const changeSname = useCallback(createFunction(setSName), [])
+
 	return (
 		<PageLayout>
 			{isSighned ? <Redirect to={SIGNIN} /> : null}
@@ -75,40 +88,40 @@ const SignUp: FC<ISignUp> = (props) => {
 						type={"email"}
 						value={mail}
 						onChange={change}
-						label="E-Mail"
+						label={t("signup.email")}
 						variant="outlined"
-						style={{ width: "50%", marginBottom: "30px" }}
+						style={EMailInput}
 					/>
 					<TextField
 						value={fname}
-						onChange={(e) => setFName(e.target.value)}
+						onChange={changeFName}
 						id="outlined-basic"
-						label="First Name"
+						label={t("signup.name")}
 						type="password"
 						variant="outlined"
 					/>
 					<TextField
 						value={sname}
-						onChange={(e) => setSName(e.target.value)}
+						onChange={changeSname}
 						id="outlined-basic"
-						label="Last Name"
+						label={t("signup.sur")}
 						type="password"
 						variant="outlined"
 					/>
 					<TextField
 						value={pass}
-						onChange={(e) => setPass(e.target.value)}
+						onChange={changePass}
 						id="outlined-basic"
-						label="Password"
+						label={t("signup.pass")}
 						type="password"
 						variant="outlined"
 					/>
 					<Button
 						disabled={blurred}
-						style={{ display: "block", marginTop: "30px" }}
+						style={ButtonInput}
 						onClick={submit}
 					>
-						Sign In
+						{t("signup.buttontxt")}
 					</Button>
 				</Paper>
 			</Grid>

@@ -1,5 +1,19 @@
 {
 	"homePage": {
 		"title": "Title"
+	},
+
+	"signup":{
+		"buttontxt": "Sign Up",
+		"email": "E-Mail",
+		"pass": "Password",
+		"name": "Name",
+		"sur": "Surname"
+	},
+
+	"signin":{
+		"button": "Sign In",
+		"email": "E-Mail",
+		"pass": "Password"
 	}
 }
