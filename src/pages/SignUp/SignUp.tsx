@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next"
 
 export interface ISignUp {}
 const ButtonInput = { display: "block", marginTop: "30px" }
-const EMailInput = { width: "50%", marginBottom: "30px" }
 const createFunction = (setter: (value: string) => void) => (
 	e: React.ChangeEvent<HTMLInputElement>
 ) => {
@@ -20,6 +19,7 @@ const createFunction = (setter: (value: string) => void) => (
 }
 
 const SignUp: FC<ISignUp> = (props) => {
+	const [signerror, setSignError] = useState<string>("")
 	const [mail, setMail] = useState<string>("")
 	const [pass, setPass] = useState<string>("")
 	const [fname, setFName] = useState<string>("")
@@ -57,7 +57,9 @@ const SignUp: FC<ISignUp> = (props) => {
 			.catch((err: AxiosError) => {
 				if (!mounted) return
 				if (err.response?.status === 400) {
-					alert("User with such a mail exists")
+					setSignError("User with such a mail exists")
+				} else {
+					setSignError("There was an error, try again")
 				}
 			})
 		return () => {
@@ -82,7 +84,7 @@ const SignUp: FC<ISignUp> = (props) => {
 		<PageLayout>
 			{isSighned ? <Redirect to={SIGNIN} /> : null}
 			<Grid className={cn.root} container justify="center">
-				<Paper className={cn.form}>
+				<Paper className={cn.form} elevation={2}>
 					<TextField
 						error={errored}
 						type={"email"}
@@ -90,14 +92,12 @@ const SignUp: FC<ISignUp> = (props) => {
 						onChange={change}
 						label={t("signup.email")}
 						variant="outlined"
-						style={EMailInput}
 					/>
 					<TextField
 						value={fname}
 						onChange={changeFName}
 						id="outlined-basic"
 						label={t("signup.name")}
-						type="password"
 						variant="outlined"
 					/>
 					<TextField
@@ -105,7 +105,6 @@ const SignUp: FC<ISignUp> = (props) => {
 						onChange={changeSname}
 						id="outlined-basic"
 						label={t("signup.sur")}
-						type="password"
 						variant="outlined"
 					/>
 					<TextField
@@ -120,11 +119,13 @@ const SignUp: FC<ISignUp> = (props) => {
 						disabled={blurred}
 						style={ButtonInput}
 						onClick={submit}
+						variant="contained"
 					>
 						{t("signup.buttontxt")}
 					</Button>
 				</Paper>
 			</Grid>
+			{!!signerror ? <Paper>{signerror}</Paper> : null}
 		</PageLayout>
 	)
 }
