@@ -8,7 +8,9 @@
 		"email": "E-Mail",
 		"pass": "Password",
 		"name": "Name",
-		"sur": "Surname"
+		"sur": "Surname",
+		"error400": "User with such a mail exists",
+		"errpr":"There was an error, try again"
 	},
 
 	"signin":{
