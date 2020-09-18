@@ -57,9 +57,9 @@ const SignUp: FC<ISignUp> = (props) => {
 			.catch((err: AxiosError) => {
 				if (!mounted) return
 				if (err.response?.status === 400) {
-					setSignError(t("signup.error400"))
+					setSignError("signup.error400")
 				} else {
-					setSignError(t("signup.error"))
+					setSignError("signup.error")
 				}
 			})
 		return () => {
@@ -125,7 +125,7 @@ const SignUp: FC<ISignUp> = (props) => {
 					</Button>
 				</Paper>
 			</Grid>
-			{!!signerror ? <Paper>{signerror}</Paper> : null}
+			{!!signerror ? <Paper>{t(signerror)}</Paper> : null}
 		</PageLayout>
 	)
 }
