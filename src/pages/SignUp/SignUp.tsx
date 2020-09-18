@@ -57,15 +57,15 @@ const SignUp: FC<ISignUp> = (props) => {
 			.catch((err: AxiosError) => {
 				if (!mounted) return
 				if (err.response?.status === 400) {
-					setSignError("User with such a mail exists")
+					setSignError(t("signup.error400"))
 				} else {
-					setSignError("There was an error, try again")
+					setSignError(t("signup.error"))
 				}
 			})
 		return () => {
 			mounted = false
 		}
-	}, [formData])
+	}, [t, formData])
 
 	const change = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setMail(e.target.value)
