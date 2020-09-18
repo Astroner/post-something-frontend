@@ -4,7 +4,15 @@ export interface Pagination<DataType> {
 	results: DataType[]
 }
 
-export interface PostType {
+export interface PostTypeShort extends Omit<PostType, "text"> {
+	shortText: string
+}
+
+export interface PostType extends PostTypeNative {
+	displayImage: string
+}
+
+export interface PostTypeNative {
 	id: string
 	title: string
 	subTitle: string
