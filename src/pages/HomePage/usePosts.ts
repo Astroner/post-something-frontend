@@ -1,9 +1,9 @@
-import { PostType } from "@/api/ApiTypes"
+import { PostTypeShort } from "@/api/ApiTypes"
 import { getAllPosts } from "@/api/posts"
 import { useCallback, useEffect, useState } from "react"
 
 const usePosts = () => {
-	const [posts, setPosts] = useState<PostType[]>([])
+	const [posts, setPosts] = useState<PostTypeShort[]>([])
 	const [hasNext, setHasNext] = useState(true)
 	const [cursor, setCursor] = useState(1)
 	const [hasError, setHasError] = useState(false)
