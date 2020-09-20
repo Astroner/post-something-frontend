@@ -1,16 +1,27 @@
-import React, { FC, memo } from "react"
+import React, { FC, memo, useCallback } from "react"
 import PageLayout from "@/layouts/PageLayout"
 import { useTranslation } from "react-i18next"
 import usePosts from "./usePosts"
 import { Grid } from "@material-ui/core"
-import Post from "@/pages/HomePage/Post"
+import Post from "@/pages/HomePage/Post/Post"
+import useWindowScroll from "@/helpers/hooks/useWindowScroll"
 
 export interface IHomePage {}
 
 const HomePage: FC<IHomePage> = () => {
 	const { t } = useTranslation()
 
-	const { posts, loading } = usePosts()
+	const { posts, loading, nextPage, hasNext } = usePosts()
+
+	useWindowScroll(
+		"bottom",
+		useCallback(() => {
+			if (!loading && hasNext) {
+				nextPage()
+			}
+		}, [nextPage, loading, hasNext])
+	)
+
 	return (
 		<PageLayout title={"Home page"}>
 			{t("homePage.title")}

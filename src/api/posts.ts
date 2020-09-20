@@ -19,7 +19,7 @@ export const getAllPosts = (
 					"https://img.buzzfeed.com/buzzfeed-static/static/2018-03/30/13/campaign_images/buzzfeed-prod-web-02/29-cool-and-random-things-you-can-probably-afford-2-3151-1522429262-9_dblbig.jpg",
 				author: item.author,
 				id: item.id,
-				shortText: item.text.slice(0, 20),
+				shortText: item.text.slice(0, 40),
 				subTitle: item.subTitle,
 				title: item.title,
 			})),
