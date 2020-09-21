@@ -14,6 +14,10 @@ export interface ISignIn {
 	login: (token: string) => void
 }
 
+const textStyle = { width: "100%", marginBottom: "30px" }
+const w100 = { width: "100%" }
+const buttonStyle = { display: "block", marginTop: "30px" }
+
 const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 	const [mail, setMail] = useState<string>("")
 	const [pass, setPass] = useState<string>("")
@@ -72,7 +76,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						onChange={change}
 						label={t("signin.email")}
 						variant="outlined"
-						style={{ width: "100%", marginBottom: "30px" }}
+						style={textStyle}
 					/>
 					<TextField
 						value={pass}
@@ -81,11 +85,11 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						label={t("signin.pass")}
 						type="password"
 						variant="outlined"
-						style={{ width: "100%" }}
+						style={w100}
 					/>
 					<Button
 						disabled={blurred}
-						style={{ display: "block", marginTop: "30px" }}
+						style={buttonStyle}
 						onClick={submit}
 						variant={"contained"}
 					>
