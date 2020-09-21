@@ -64,7 +64,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 		<PageLayout>
 			{isLogged ? <Redirect to={HOME} /> : null}
 			<Grid className={cn.root} container justify="center">
-				<Paper className={cn.form}>
+				<Paper className={cn.form} elevation={2}>
 					<TextField
 						error={errored}
 						type={"email"}
@@ -72,7 +72,7 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						onChange={change}
 						label={t("signin.email")}
 						variant="outlined"
-						style={{ width: "50%", marginBottom: "30px" }}
+						style={{ width: "100%", marginBottom: "30px" }}
 					/>
 					<TextField
 						value={pass}
@@ -81,11 +81,13 @@ const SignIn: FC<ISignIn> = ({ login, ...props }) => {
 						label={t("signin.pass")}
 						type="password"
 						variant="outlined"
+						style={{ width: "100%" }}
 					/>
 					<Button
 						disabled={blurred}
 						style={{ display: "block", marginTop: "30px" }}
 						onClick={submit}
+						variant={"contained"}
 					>
 						{t("signin.button")}
 					</Button>
