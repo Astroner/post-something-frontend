@@ -32,10 +32,10 @@ const usePosts = () => {
 	}, [cursor])
 
 	const nextPage = useCallback(() => {
-		if (hasNext) {
+		if (hasNext && !loading) {
 			setCursor((p) => p + 1)
 		}
-	}, [hasNext])
+	}, [hasNext, loading])
 
 	return { posts, hasNext, cursor, nextPage, hasError, loading }
 }
