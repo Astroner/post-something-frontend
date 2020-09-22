@@ -5,6 +5,7 @@ import usePosts from "./usePosts"
 import { Grid } from "@material-ui/core"
 import Post from "@/pages/HomePage/Post/Post"
 import useWindowScroll from "@/helpers/hooks/useWindowScroll"
+import Spinner from "@/components/Spinner"
 
 export interface IHomePage {}
 
@@ -25,7 +26,7 @@ const HomePage: FC<IHomePage> = () => {
 	return (
 		<PageLayout title={"Home page"}>
 			{t("homePage.title")}
-			<div>{loading && "Loading..."}</div>
+			<div>{loading && Spinner}</div>
 			<Grid container spacing={1} style={{ paddingTop: "20px" }}>
 				{posts.map((item) => (
 					<Grid item xs={4} key={item.id} direction={"column"}>
