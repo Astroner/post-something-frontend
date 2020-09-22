@@ -1,6 +1,5 @@
 import React, { FC, memo, useCallback } from "react"
 import PageLayout from "@/layouts/PageLayout"
-import { useTranslation } from "react-i18next"
 import usePosts from "./usePosts"
 import { Grid } from "@material-ui/core"
 import Post from "@/pages/HomePage/Post/Post"
@@ -9,9 +8,9 @@ import Spinner from "@/components/Spinner"
 
 export interface IHomePage {}
 
-const HomePage: FC<IHomePage> = () => {
-	const { t } = useTranslation()
+const gridStyle = { paddingTop: "20px" }
 
+const HomePage: FC<IHomePage> = () => {
 	const { posts, loading, nextPage, hasNext } = usePosts()
 
 	useWindowScroll(
@@ -25,9 +24,7 @@ const HomePage: FC<IHomePage> = () => {
 
 	return (
 		<PageLayout title={"Home page"}>
-			{t("homePage.title")}
-			<div>{loading && Spinner}</div>
-			<Grid container spacing={1} style={{ paddingTop: "20px" }}>
+			<Grid container spacing={1} style={gridStyle}>
 				{posts.map((item) => (
 					<Grid item xs={4} key={item.id} direction={"column"}>
 						<Post
@@ -38,6 +35,7 @@ const HomePage: FC<IHomePage> = () => {
 					</Grid>
 				))}
 			</Grid>
+			{loading && <Spinner />}
 		</PageLayout>
 	)
 }
